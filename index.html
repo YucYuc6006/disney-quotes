@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Disney Quote Generator</title>
+    <title>Disney Quote Merger</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>✨ Random Disney Quote Generator ✨</h1>
+        <h1>✨ Disney Quote Merger ✨</h1>
         <button id="generateButton" class="generate-button" disabled>Loading Quotes...</button>
-        <div id="quote" class="quote-box">Quotes are loading. Please wait.</div>
+        <div id="quote" class="quote-box">Quotes Have loaded, Have fun!</div>
     </div>
 
     <script>
         let quotes = [];
 
-        // Fetch quotes from the JSON file
         fetch('quotes.json')
             .then(response => {
                 if (!response.ok) {
@@ -27,7 +26,6 @@
             .then(data => {
                 quotes = data.quotes;
 
-                // Enable button after quotes are loaded
                 const generateButton = document.getElementById('generateButton');
                 generateButton.textContent = "Generate Quote";
                 generateButton.disabled = false;
@@ -38,22 +36,18 @@
                 document.getElementById('quote').textContent = "Failed to load quotes. Please try again later.";
             });
 
-        // Function to generate a random combined quote
         function generateQuote() {
             if (quotes.length < 2) {
                 document.getElementById('quote').textContent = "Not enough quotes available. Please try again later.";
                 return;
             }
 
-            // Pick two random quotes
             const firstQuote = quotes[Math.floor(Math.random() * quotes.length)];
             const secondQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-            // Split quotes into halves
             const firstHalf = firstQuote.split(' ').slice(0, Math.ceil(firstQuote.split(' ').length / 2)).join(' ');
             const secondHalf = secondQuote.split(' ').slice(Math.floor(secondQuote.split(' ').length / 2)).join(' ');
 
-            // Combine the halves
             const combinedQuote = `${firstHalf} ${secondHalf}`;
             document.getElementById('quote').textContent = combinedQuote;
         }
