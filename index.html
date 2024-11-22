@@ -45,10 +45,16 @@
                 return;
             }
 
+            // Pick two random quotes
             const firstQuote = quotes[Math.floor(Math.random() * quotes.length)];
             const secondQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-            const combinedQuote = `${firstQuote} ${secondQuote}`;
+            // Split quotes into halves
+            const firstHalf = firstQuote.split(' ').slice(0, Math.ceil(firstQuote.split(' ').length / 2)).join(' ');
+            const secondHalf = secondQuote.split(' ').slice(Math.floor(secondQuote.split(' ').length / 2)).join(' ');
+
+            // Combine the halves
+            const combinedQuote = `${firstHalf} ${secondHalf}`;
             document.getElementById('quote').textContent = combinedQuote;
         }
     </script>
